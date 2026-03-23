@@ -10,8 +10,8 @@
         <a href="#" @click.prevent="activeSection = 'dashboard'" :class="{active: activeSection === 'dashboard'}">
           <i class="fa fa-tachometer"></i> Dashboard
         </a>
-        <a href="#" @click.prevent="activeSection = 'video'" :class="{active: activeSection === 'video'}">
-          <i class="fa fa-film"></i> Video Background
+        <a href="#" @click.prevent="activeSection = 'banner'" :class="{active: activeSection === 'banner'}">
+          <i class="fa fa-television"></i> Main Banner
         </a>
         <a href="#" @click.prevent="activeSection = 'scroll'" :class="{active: activeSection === 'scroll'}">
           <i class="fa fa-image"></i> Scroll Backgrounds
@@ -43,15 +43,15 @@
           <div class="stat-card">
             <i class="fa fa-film stat-icon" style="color:#f5ac53"></i>
             <div>
-              <div class="stat-label">Videos Uploaded</div>
-              <div class="stat-value">{{ videos.length }}</div>
+              <div class="stat-label">Banner Media</div>
+              <div class="stat-value">{{ bgStore.bannersList.length }}</div>
             </div>
           </div>
           <div class="stat-card">
             <i class="fa fa-image stat-icon" style="color:#8cb080"></i>
             <div>
               <div class="stat-label">Scroll Backgrounds</div>
-              <div class="stat-value">{{ scrollBgs.length }}</div>
+              <div class="stat-value">{{ bgStore.scrollBgsList.length }}</div>
             </div>
           </div>
           <div class="stat-card">
@@ -75,31 +75,41 @@
         </div>
       </section>
 
-      <!-- Video Background Manager -->
-      <section v-if="activeSection === 'video'" class="section-content">
+      <!-- Main Banner Background Manager -->
+      <section v-if="activeSection === 'banner'" class="section-content">
         <div class="card">
-          <h3 class="card-title">Upload New Video</h3>
-          <p class="card-sub">Upload an MP4 video file to use as the homepage hero background.</p>
+          <h3 class="card-title">Upload Banner Media</h3>
+          <p class="card-sub">Upload an MP4 video or an image for the homepage banner background.</p>
           <div class="upload-row">
-            <input type="file" accept="video/mp4,video/webm" @change="onVideoUpload" class="file-input">
-            <span class="file-hint">MP4 or WebM format</span>
+            <input type="file" accept="video/mp4,video/webm,image/*" @change="onBannerUpload" class="file-input">
+            <span class="file-hint">MP4, WebM, JPG, PNG, WEBP</span>
           </div>
         </div>
 
         <div class="card">
-          <h3 class="card-title">Available Videos <span class="count-badge">{{ videos.length }}</span></h3>
+          <h3 class="card-title">Available Media <span class="count-badge">{{ bgStore.bannersList.length }}</span></h3>
           <div class="video-grid">
-            <div v-for="(vid, i) in videos" :key="i" class="video-card" :class="{selected: activeVideo === i}">
-              <video :src="vid.url" muted class="video-thumb"></video>
+            <div v-for="(item, i) in bgStore.bannersList" :key="i" class="video-card" :class="{selected: bgStore.banner === item.url}">
+              <video v-if="item.type === 'video'" :src="item.url" muted class="video-thumb"></video>
+              <img v-else :src="item.url" class="video-thumb" alt="">
               <div class="video-info">
-                <p class="video-name">{{ vid.name }}</p>
-                <button @click="setActiveVideo(i)" class="select-btn" :class="{active: activeVideo === i}">
-                  {{ activeVideo === i ? '✓ Active' : 'Set Active' }}
-                </button>
+                <p class="video-name">{{ item.name }}</p>
+                  <div style="display:flex; gap: 8px;">
+                    <button @click="setActiveBanner(item)" class="select-btn" :class="{active: bgStore.banner === item.url}">
+                      {{ bgStore.banner === item.url ? '✓ Active' : 'Set Active' }}
+                    </button>
+                    <button @click="deleteBanner(i)" class="del-btn" style="padding:4px 8px; font-size:12px; height:auto; border-radius:6px;" title="Delete">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </div>
+                  <div style="display:flex; flex-direction: column; align-items: flex-end;">
+                    <span v-if="item.type === 'video'" style="font-size:10px; color:#aaa"><i class="fa fa-film"></i> Video</span>
+                    <span v-else style="font-size:10px; color:#aaa"><i class="fa fa-image"></i> Image</span>
+                  </div>
               </div>
             </div>
           </div>
-          <p v-if="videos.length === 0" class="empty-msg">No videos uploaded yet.</p>
+          <p v-if="bgStore.bannersList.length === 0" class="empty-msg">No media uploaded yet.</p>
         </div>
       </section>
 
@@ -118,20 +128,25 @@
         </div>
 
         <div v-for="(sec, secIdx) in scrollSections" :key="secIdx" class="card">
-          <h3 class="card-title">{{ sec }} <span class="count-badge">{{ scrollBgs.filter(b => b.section === secIdx).length }}</span></h3>
+          <h3 class="card-title">{{ sec }} <span class="count-badge">{{ bgStore.scrollBgsList.filter(b => b.section === secIdx).length }}</span></h3>
           <div class="img-grid">
-            <div v-for="(bg, i) in scrollBgs.filter(b => b.section === secIdx)" :key="i"
-                class="img-card" :class="{selected: bg.active}">
+            <div v-for="(bg, i) in bgStore.scrollBgsList.filter(b => b.section === secIdx)" :key="i"
+                class="img-card" :class="{selected: (secIdx === 0 ? bgStore.applyNow === bg.url : bgStore.ourFacts === bg.url)}">
               <img :src="bg.url" class="bg-thumb" alt="">
               <div class="img-info">
                 <p class="img-name">{{ bg.name }}</p>
-                <button @click="setActiveBg(bg)" class="select-btn" :class="{active: bg.active}">
-                  {{ bg.active ? '✓ Active' : 'Set Active' }}
-                </button>
+                <div style="display:flex; justify-content: space-between; align-items: center;">
+                  <button @click="setActiveBg(bg)" class="select-btn" :class="{active: (secIdx === 0 ? bgStore.applyNow === bg.url : bgStore.ourFacts === bg.url)}">
+                    {{ (secIdx === 0 ? bgStore.applyNow === bg.url : bgStore.ourFacts === bg.url) ? '✓ Active' : 'Set Active' }}
+                  </button>
+                  <button @click="deleteScrollBg(bg)" class="del-btn" style="padding:4px 8px; font-size:12px; height:auto; border-radius:6px;" title="Delete">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          <p v-if="scrollBgs.filter(b => b.section === secIdx).length === 0" class="empty-msg">No images for this section yet.</p>
+          <p v-if="bgStore.scrollBgsList.filter(b => b.section === secIdx).length === 0" class="empty-msg">No images for this section yet.</p>
         </div>
       </section>
 
@@ -323,67 +338,98 @@ const router = useRouter()
 const activeSection = ref('dashboard')
 const sectionLabels = {
   dashboard: 'Dashboard',
-  video: 'Video Background Manager',
+  banner: 'Main Banner Background',
   scroll: 'Scroll Section Backgrounds',
   applicants: 'Applicants Management',
   users: 'Users Management'
 }
 
-// --- Video Background ---
-const videos = ref([
-  { name: 'course-video.mp4', url: '/assets/images/course-video.mp4' }
-])
-const activeVideo = ref(0)
+// --- Main Banner Background ---
+const fileToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
 
-const onVideoUpload = (e) => {
+const onBannerUpload = async (e) => {
   const file = e.target.files[0]
   if (!file) return
-  const url = URL.createObjectURL(file)
-  videos.value.push({ name: file.name, url })
-  activeVideo.value = videos.value.length - 1
+  
+  const type = file.type.startsWith('image/') ? 'image' : 'video'
+  let url = ''
+  
+  if (type === 'image') {
+    url = await fileToBase64(file)
+  } else {
+    url = URL.createObjectURL(file)
+  }
+  
+  const newEntry = { name: file.name, url, type }
+  bgStore.bannersList.push(newEntry)
+  setActiveBanner(newEntry)
   e.target.value = ''
 }
 
-const setActiveVideo = (i) => {
-  activeVideo.value = i
+const setActiveBanner = (item) => {
+  bgStore.banner = item.url
+  bgStore.bannerType = item.type
+}
+
+const deleteBanner = (index) => {
+  if (confirm('Delete this banner media?')) {
+    const item = bgStore.bannersList[index]
+    bgStore.bannersList.splice(index, 1)
+    // If deleted the active one, fallback
+    if (bgStore.banner === item.url) {
+      if (bgStore.bannersList.length > 0) {
+        setActiveBanner(bgStore.bannersList[0])
+      } else {
+        bgStore.banner = '/assets/images/course-video.mp4'
+        bgStore.bannerType = 'video'
+      }
+    }
+  }
 }
 
 // --- Scroll Backgrounds ---
-// Section 0 = Apply Now (laki & bae background)
-// Section 1 = Our Facts (girl drawing background)
 const scrollSections = ['Section 2: Apply Now (Man & Woman Background)', 'Section 3: Our Facts (Girl Drawing Background)']
 const selectedScrollSection = ref(0)
 
-// Pre-populate with the default/existing background images from the template
-const scrollBgs = ref([
-  { name: 'apply-bg.jpg (Default)', url: '/assets/images/apply-bg.jpg', section: 0, active: true },
-  { name: 'facts-bg.jpg (Default)', url: '/assets/images/facts-bg.jpg', section: 1, active: true },
-])
-
-// Set the initial defaults into the shared store so Home.vue reflects them
-bgStore.applyNow = '/assets/images/apply-bg.jpg'
-bgStore.ourFacts = '/assets/images/facts-bg.jpg'
-
-const onScrollBgUpload = (e) => {
+const onScrollBgUpload = async (e) => {
   const file = e.target.files[0]
   if (!file) return
-  const url = URL.createObjectURL(file)
-  // Deactivate others in same section
-  scrollBgs.value.forEach(b => { if(b.section === selectedScrollSection.value) b.active = false })
-  const newEntry = { name: file.name, url, section: selectedScrollSection.value, active: true }
-  scrollBgs.value.push(newEntry)
-  // Immediately apply to bgStore so Home.vue updates
+  
+  const url = await fileToBase64(file)
+  const newEntry = { name: file.name, url, section: selectedScrollSection.value }
+  bgStore.scrollBgsList.push(newEntry)
+  
+  // Immediately apply
   if (selectedScrollSection.value === 0) bgStore.applyNow = url
   else if (selectedScrollSection.value === 1) bgStore.ourFacts = url
   e.target.value = ''
 }
 
 const setActiveBg = (bg) => {
-  scrollBgs.value.forEach(b => { if(b.section === bg.section) b.active = false })
-  bg.active = true
-  // Apply to shared store — Home.vue will reactively update
   if (bg.section === 0) bgStore.applyNow = bg.url
   else if (bg.section === 1) bgStore.ourFacts = bg.url
+}
+
+const deleteScrollBg = (bg) => {
+  if (confirm('Delete this background image?')) {
+    const idx = bgStore.scrollBgsList.findIndex(b => b.url === bg.url)
+    if (idx !== -1) {
+      bgStore.scrollBgsList.splice(idx, 1)
+      // Fallback if deleted active
+      if (bg.section === 0 && bgStore.applyNow === bg.url) {
+        bgStore.applyNow = '/assets/images/apply-bg.jpg'
+      } else if (bg.section === 1 && bgStore.ourFacts === bg.url) {
+        bgStore.ourFacts = '/assets/images/facts-bg.jpg'
+      }
+    }
+  }
 }
 
 // --- Applicants ---
