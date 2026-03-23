@@ -66,7 +66,7 @@
   <!-- ***** Main Banner Area Start ***** -->
   <section class="section main-banner" id="top" data-section="section1">
       <video autoplay muted loop id="bg-video">
-          <source src="assets/images/course-video.mp4" type="video/mp4" />
+          <source src="/assets/images/course-video.mp4" type="video/mp4" />
       </video>
 
       <div class="video-overlay header-text">
@@ -96,7 +96,7 @@
           
             <div class="item">
               <div class="icon">
-                <img src="assets/images/service-icon-01.png" alt="">
+                <img src="/assets/images/service-icon-01.png" alt="">
               </div>
               <div class="down-content">
                 <h4>Best Education</h4>
@@ -106,7 +106,7 @@
             
             <div class="item">
               <div class="icon">
-                <img src="assets/images/service-icon-02.png" alt="">
+                <img src="/assets/images/service-icon-02.png" alt="">
               </div>
               <div class="down-content">
                 <h4>Best Teachers</h4>
@@ -116,7 +116,7 @@
             
             <div class="item">
               <div class="icon">
-                <img src="assets/images/service-icon-03.png" alt="">
+                <img src="/assets/images/service-icon-03.png" alt="">
               </div>
               <div class="down-content">
                 <h4>Best Students</h4>
@@ -126,7 +126,7 @@
             
             <div class="item">
               <div class="icon">
-                <img src="assets/images/service-icon-02.png" alt="">
+                <img src="/assets/images/service-icon-02.png" alt="">
               </div>
               <div class="down-content">
                 <h4>Online Meeting</h4>
@@ -136,7 +136,7 @@
             
             <div class="item">
               <div class="icon">
-                <img src="assets/images/service-icon-03.png" alt="">
+                <img src="/assets/images/service-icon-03.png" alt="">
               </div>
               <div class="down-content">
                 <h4>Best Networking</h4>
@@ -181,7 +181,7 @@
                   <div class="price">
                     <span>$22.00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
+                  <a href="meeting-details.html"><img src="/assets/images/meeting-01.jpg" alt="New Lecturer Meeting"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
@@ -198,7 +198,7 @@
                   <div class="price">
                     <span>$36.00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-02.jpg" alt="Online Teaching"></a>
+                  <a href="meeting-details.html"><img src="/assets/images/meeting-02.jpg" alt="Online Teaching"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
@@ -215,7 +215,7 @@
                   <div class="price">
                     <span>$14.00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-03.jpg" alt="Higher Education"></a>
+                  <a href="meeting-details.html"><img src="/assets/images/meeting-03.jpg" alt="Higher Education"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
@@ -232,7 +232,7 @@
                   <div class="price">
                     <span>$48.00</span>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/meeting-04.jpg" alt="Student Training"></a>
+                  <a href="meeting-details.html"><img src="/assets/images/meeting-04.jpg" alt="Student Training"></a>
                 </div>
                 <div class="down-content">
                   <div class="date">
@@ -348,7 +348,7 @@
         <div class="col-lg-12">
           <div class="owl-courses-item owl-carousel">
             <div class="item">
-              <img src="assets/images/course-01.jpg" alt="Course One">
+              <img src="/assets/images/course-01.jpg" alt="Course One">
               <div class="down-content">
                 <h4>Morbi tincidunt elit vitae justo rhoncus</h4>
                 <div class="info">
@@ -370,7 +370,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-02.jpg" alt="Course Two">
+              <img src="/assets/images/course-02.jpg" alt="Course Two">
               <div class="down-content">
                 <h4>Curabitur molestie dignissim purus vel</h4>
                 <div class="info">
@@ -390,7 +390,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-03.jpg" alt="">
+              <img src="/assets/images/course-03.jpg" alt="">
               <div class="down-content">
                 <h4>Nulla at ipsum a mauris egestas tempor</h4>
                 <div class="info">
@@ -411,7 +411,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-04.jpg" alt="">
+              <img src="/assets/images/course-04.jpg" alt="">
               <div class="down-content">
                 <h4>Aenean molestie quis libero gravida</h4>
                 <div class="info">
@@ -433,7 +433,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-01.jpg" alt="">
+              <img src="/assets/images/course-01.jpg" alt="">
               <div class="down-content">
                 <h4>Lorem ipsum dolor sit amet adipiscing elit</h4>
                 <div class="info">
@@ -455,7 +455,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-02.jpg" alt="">
+              <img src="/assets/images/course-02.jpg" alt="">
               <div class="down-content">
                 <h4>TemplateMo is the best website for Free CSS</h4>
                 <div class="info">
@@ -477,7 +477,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-03.jpg" alt="">
+              <img src="/assets/images/course-03.jpg" alt="">
               <div class="down-content">
                 <h4>Web Design Templates at your finger tips</h4>
                 <div class="info">
@@ -499,7 +499,7 @@
               </div>
             </div>
             <div class="item">
-              <img src="assets/images/course-04.jpg" alt="">
+              <img src="/assets/images/course-04.jpg" alt="">
               <div class="down-content">
                 <h4>Please visit our website again</h4>
                 <div class="info">
@@ -570,7 +570,7 @@
         </div> 
         <div class="col-lg-6 align-self-center">
           <div class="video">
-            <a href="https://www.youtube.com/watch?v=HndV87XpkWg" target="_blank"><img src="assets/images/play-icon.png" alt=""></a>
+            <a href="https://www.youtube.com/watch?v=HndV87XpkWg" target="_blank"><img src="/assets/images/play-icon.png" alt=""></a>
           </div>
         </div>
       </div>
@@ -686,10 +686,81 @@
         </div>
       </div>
     </div>
+
+  <!-- ====== FLOATING CHATBOX ====== -->
+  <div class="chat-widget">
+    <!-- Toggle Button -->
+    <button class="chat-toggle-btn" @click="toggleChat" :class="{ 'chat-open': isChatOpen }" title="Chat with us">
+      <span class="chat-icon" v-if="!isChatOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </span>
+      <span class="chat-icon" v-else>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </span>
+      <span class="chat-unread-dot" v-if="!isChatOpen && hasUnread"></span>
+    </button>
+
+    <!-- Chat Window -->
+    <transition name="chat-slide">
+      <div class="chat-window" v-if="isChatOpen">
+        <!-- Header -->
+        <div class="chat-header">
+          <div class="chat-header-avatar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+            </svg>
+          </div>
+          <div class="chat-header-info">
+            <span class="chat-header-name">ANGELOW Support</span>
+            <span class="chat-header-status"><span class="status-dot"></span>Online</span>
+          </div>
+        </div>
+
+        <!-- Messages Body -->
+        <div class="chat-body" ref="chatBody">
+          <div v-for="(msg, idx) in chatMessages" :key="idx"
+               :class="['chat-msg-row', msg.from === 'user' ? 'chat-msg-row--user' : 'chat-msg-row--bot']">
+            <div class="chat-bubble" :class="msg.from === 'user' ? 'chat-bubble--user' : 'chat-bubble--bot'">
+              {{ msg.text }}
+              <span class="chat-time">{{ msg.time }}</span>
+            </div>
+          </div>
+          <!-- Typing indicator -->
+          <div class="chat-msg-row chat-msg-row--bot" v-if="isTyping">
+            <div class="chat-bubble chat-bubble--bot chat-typing">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="chat-footer">
+          <input
+            class="chat-input"
+            type="text"
+            v-model="chatInput"
+            placeholder="Type a message..."
+            @keyup.enter="sendMessage"
+          />
+          <button class="chat-send-btn" @click="sendMessage">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </transition>
+  </div>
+  <!-- ====== END CHATBOX ====== -->
+
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { useRouter } from 'vue-router'
 import { bgStore } from '../store/backgrounds.js'
 
@@ -699,6 +770,57 @@ const form = ref({
   password: ''
 })
 const router = useRouter()
+
+// ---- Chat Widget ----
+const isChatOpen = ref(false)
+const hasUnread = ref(true)
+const chatInput = ref('')
+const isTyping = ref(false)
+const chatBody = ref(null)
+const botReplies = [
+  "Hello! How can I help you today? 😊",
+  "That's a great question! Please contact our team at angelow@meet.edu.ph for more details.",
+  "Thank you for reaching out! We'll get back to you shortly.",
+  "Feel free to explore our courses and upcoming meetings!",
+  "Is there anything else I can assist you with?"
+]
+let replyIndex = 0
+
+const chatMessages = ref([
+  { from: 'bot', text: 'Hi there! 👋 Welcome to ANGELOW. How can we help you today?', time: formatTime() }
+])
+
+function formatTime() {
+  const now = new Date()
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+}
+
+function toggleChat() {
+  isChatOpen.value = !isChatOpen.value
+  if (isChatOpen.value) hasUnread.value = false
+}
+
+async function sendMessage() {
+  const text = chatInput.value.trim()
+  if (!text) return
+  chatMessages.value.push({ from: 'user', text, time: formatTime() })
+  chatInput.value = ''
+  await scrollToBottom()
+  isTyping.value = true
+  await scrollToBottom()
+  setTimeout(async () => {
+    isTyping.value = false
+    const reply = botReplies[replyIndex % botReplies.length]
+    replyIndex++
+    chatMessages.value.push({ from: 'bot', text: reply, time: formatTime() })
+    await scrollToBottom()
+  }, 1200)
+}
+
+async function scrollToBottom() {
+  await nextTick()
+  if (chatBody.value) chatBody.value.scrollTop = chatBody.value.scrollHeight
+}
 
 const login = async () => {
   try {
@@ -720,3 +842,229 @@ const login = async () => {
   }
 }
 </script>
+
+<style scoped>
+/* ===== CHAT WIDGET ===== */
+.chat-widget {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+/* Toggle Button */
+.chat-toggle-btn {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5ac53 0%, #e8841a 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 6px 24px rgba(245, 172, 83, 0.55), 0 2px 8px rgba(0,0,0,0.18);
+  transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s;
+  position: relative;
+  flex-shrink: 0;
+}
+.chat-toggle-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 10px 34px rgba(245, 172, 83, 0.7), 0 2px 12px rgba(0,0,0,0.18);
+}
+.chat-toggle-btn.chat-open {
+  background: linear-gradient(135deg, #484860 0%, #2c2c3a 100%);
+  box-shadow: 0 6px 24px rgba(72, 72, 96, 0.5);
+}
+.chat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-unread-dot {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 13px;
+  height: 13px;
+  background: #ef4444;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  animation: pulse-dot 1.4s infinite;
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.75; }
+}
+
+/* Chat Window */
+.chat-window {
+  width: 340px;
+  max-width: calc(100vw - 56px);
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18), 0 4px 16px rgba(245,172,83,0.12);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Transition */
+.chat-slide-enter-active { animation: chatSlideIn 0.32s cubic-bezier(.34,1.56,.64,1); }
+.chat-slide-leave-active { animation: chatSlideOut 0.22s ease-in forwards; }
+@keyframes chatSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.93); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes chatSlideOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(30px) scale(0.93); }
+}
+
+/* Header */
+.chat-header {
+  background: linear-gradient(135deg, #f5ac53 0%, #e8841a 100%);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+}
+.chat-header-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.chat-header-info { display: flex; flex-direction: column; gap: 2px; }
+.chat-header-name { font-weight: 700; font-size: 15px; letter-spacing: 0.3px; }
+.chat-header-status { font-size: 12px; display: flex; align-items: center; gap: 5px; opacity: 0.9; }
+.status-dot {
+  width: 8px; height: 8px;
+  background: #bbf7d0;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-dot 1.4s infinite;
+}
+
+/* Body */
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f8f8fc;
+  min-height: 240px;
+  max-height: 320px;
+}
+.chat-body::-webkit-scrollbar { width: 4px; }
+.chat-body::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+.chat-msg-row { display: flex; }
+.chat-msg-row--user { justify-content: flex-end; }
+.chat-msg-row--bot  { justify-content: flex-start; }
+
+.chat-bubble {
+  max-width: 78%;
+  padding: 9px 14px 22px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  position: relative;
+  word-break: break-word;
+}
+.chat-bubble--user {
+  background: linear-gradient(135deg, #f5ac53 0%, #e8841a 100%);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.chat-bubble--bot {
+  background: #fff;
+  color: #2d2d3a;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.chat-time {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 10px;
+  opacity: 0.55;
+  white-space: nowrap;
+}
+
+/* Typing indicator */
+.chat-typing {
+  padding: 12px 16px 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.chat-typing span {
+  width: 7px; height: 7px;
+  background: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  animation: typingBounce 1.1s infinite both;
+}
+.chat-typing span:nth-child(2) { animation-delay: 0.18s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.36s; }
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: translateY(0); background: #ccc; }
+  40% { transform: translateY(-7px); background: #f5ac53; }
+}
+
+/* Footer */
+.chat-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid #f0f0f5;
+  background: #fff;
+}
+.chat-input {
+  flex: 1;
+  border: 1.5px solid #ececf2;
+  border-radius: 30px;
+  padding: 9px 16px;
+  font-size: 13.5px;
+  outline: none;
+  background: #f8f8fc;
+  color: #2d2d3a;
+  transition: border-color 0.2s;
+}
+.chat-input:focus {
+  border-color: #f5ac53;
+  background: #fff;
+}
+.chat-send-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f5ac53 0%, #e8841a 100%);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 3px 10px rgba(245,172,83,0.4);
+}
+.chat-send-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 16px rgba(245,172,83,0.55);
+}
+</style>

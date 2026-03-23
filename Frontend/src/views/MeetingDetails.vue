@@ -88,7 +88,7 @@
                   <div class="date">
                     <h6>Nov <span>12</span></h6>
                   </div>
-                  <a href="meeting-details.html"><img src="assets/images/single-meeting.jpg" alt=""></a>
+                  <a href="meeting-details.html"><img src="/assets/images/single-meeting.jpg" alt=""></a>
                 </div>
                 <div class="down-content">
                   <a href="meeting-details.html"><h4>Online Teaching and Learning Tools</h4></a>
@@ -168,3 +168,4 @@
 <script setup>
 // Converted from meeting-details.html
 </script>
+
