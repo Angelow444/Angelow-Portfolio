@@ -715,30 +715,40 @@
             </svg>
           </div>
           <div class="chat-header-info">
-            <span class="chat-header-name">ANGELOW Support</span>
+            <span class="chat-header-name">Global Community Chat</span>
             <span class="chat-header-status"><span class="status-dot"></span>Online</span>
           </div>
         </div>
 
-        <!-- Messages Body -->
-        <div class="chat-body" ref="chatBody">
-          <div v-for="(msg, idx) in chatMessages" :key="idx"
-               :class="['chat-msg-row', msg.from === 'user' ? 'chat-msg-row--user' : 'chat-msg-row--bot']">
-            <div class="chat-bubble" :class="msg.from === 'user' ? 'chat-bubble--user' : 'chat-bubble--bot'">
-              {{ msg.text }}
-              <span class="chat-time">{{ msg.time }}</span>
-            </div>
+        <!-- Name Input Screen -->
+        <div class="chat-body chat-name-screen" v-if="isAskingName">
+          <div class="name-prompt">
+            <h4>👋 Welcome!</h4>
+            <p>Please enter your name to start chatting with the community.</p>
+            <input 
+              v-model="userName" 
+              placeholder="Your name..." 
+              class="chat-input"
+              @keyup.enter="saveName"
+            />
+            <button class="name-save-btn" @click="saveName">Start Chatting</button>
           </div>
-          <!-- Typing indicator -->
-          <div class="chat-msg-row chat-msg-row--bot" v-if="isTyping">
-            <div class="chat-bubble chat-bubble--bot chat-typing">
-              <span></span><span></span><span></span>
+        </div>
+
+        <!-- Messages Body -->
+        <div class="chat-body" ref="chatBody" v-else>
+          <div v-for="(msg, idx) in chatMessages" :key="idx"
+               :class="['chat-msg-row', msg.from === 'user' ? 'chat-msg-row--user' : 'chat-msg-row--other']">
+            <div class="chat-bubble" :class="msg.from === 'user' ? 'chat-bubble--user' : 'chat-bubble--other'">
+              <span class="chat-msg-name" v-if="msg.from !== 'user'">{{ msg.name }}</span>
+              <div class="chat-text">{{ msg.text }}</div>
+              <span class="chat-time">{{ msg.time }}</span>
             </div>
           </div>
         </div>
 
         <!-- Input -->
-        <div class="chat-footer">
+        <div class="chat-footer" v-if="!isAskingName">
           <input
             class="chat-input"
             type="text"
@@ -760,7 +770,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { bgStore } from '../store/backgrounds.js'
 
@@ -777,18 +787,42 @@ const hasUnread = ref(true)
 const chatInput = ref('')
 const isTyping = ref(false)
 const chatBody = ref(null)
-const botReplies = [
-  "Hello! How can I help you today? 😊",
-  "That's a great question! Please contact our team at angelow@meet.edu.ph for more details.",
-  "Thank you for reaching out! We'll get back to you shortly.",
-  "Feel free to explore our courses and upcoming meetings!",
-  "Is there anything else I can assist you with?"
-]
-let replyIndex = 0
 
-const chatMessages = ref([
-  { from: 'bot', text: 'Hi there! 👋 Welcome to ANGELOW. How can we help you today?', time: formatTime() }
-])
+const userName = ref(localStorage.getItem('chat_user_name') || '')
+const isAskingName = ref(!userName.value)
+const chatMessages = ref([])
+let pollInterval = null
+
+async function fetchMessages() {
+  try {
+    const res = await fetch('http://localhost:8000/api/chat/messages')
+    if (res.ok) {
+      const data = await res.json()
+      const newMessages = data.map(m => ({
+        from: m.name === userName.value ? 'user' : 'other',
+        name: m.name,
+        text: m.message,
+        time: new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      }))
+      
+      // Update only if messages changed
+      if (JSON.stringify(newMessages) !== JSON.stringify(chatMessages.value)) {
+        chatMessages.value = newMessages
+        if (!isChatOpen.value) hasUnread.value = true
+        await scrollToBottom()
+      }
+    }
+  } catch (err) {
+    console.error('Fetch error:', err)
+  }
+}
+
+function saveName() {
+  if (userName.value.trim()) {
+    localStorage.setItem('chat_user_name', userName.value.trim())
+    isAskingName.value = false
+  }
+}
 
 function formatTime() {
   const now = new Date()
@@ -797,30 +831,47 @@ function formatTime() {
 
 function toggleChat() {
   isChatOpen.value = !isChatOpen.value
-  if (isChatOpen.value) hasUnread.value = false
+  if (isChatOpen.value) {
+    hasUnread.value = false
+    scrollToBottom()
+  }
 }
 
 async function sendMessage() {
   const text = chatInput.value.trim()
-  if (!text) return
-  chatMessages.value.push({ from: 'user', text, time: formatTime() })
+  if (!text || !userName.value) return
+  
+  const tempMsg = { name: userName.value, message: text }
   chatInput.value = ''
-  await scrollToBottom()
-  isTyping.value = true
-  await scrollToBottom()
-  setTimeout(async () => {
-    isTyping.value = false
-    const reply = botReplies[replyIndex % botReplies.length]
-    replyIndex++
-    chatMessages.value.push({ from: 'bot', text: reply, time: formatTime() })
-    await scrollToBottom()
-  }, 1200)
+  
+  try {
+    const res = await fetch('http://localhost:8000/api/chat/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(tempMsg)
+    })
+    
+    if (res.ok) {
+      await fetchMessages()
+    }
+  } catch (err) {
+    console.error('Send error:', err)
+  }
 }
 
 async function scrollToBottom() {
   await nextTick()
   if (chatBody.value) chatBody.value.scrollTop = chatBody.value.scrollHeight
 }
+
+onMounted(() => {
+  fetchMessages()
+  pollInterval = setInterval(fetchMessages, 3000)
+})
+
+onUnmounted(() => {
+  if (pollInterval) clearInterval(pollInterval)
+})
 
 const login = async () => {
   try {
@@ -968,16 +1019,37 @@ const login = async () => {
   min-height: 240px;
   max-height: 320px;
 }
+.chat-name-screen {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.name-prompt h4 { margin-bottom: 8px; color: #2d2d3a; }
+.name-prompt p { font-size: 13px; color: #666; margin-bottom: 20px; }
+.name-save-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(135deg, #f5ac53 0%, #e8841a 100%);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.name-save-btn:hover { opacity: 0.9; }
+
 .chat-body::-webkit-scrollbar { width: 4px; }
 .chat-body::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
 
-.chat-msg-row { display: flex; }
+.chat-msg-row { display: flex; width: 100%; }
 .chat-msg-row--user { justify-content: flex-end; }
-.chat-msg-row--bot  { justify-content: flex-start; }
+.chat-msg-row--other { justify-content: flex-start; }
 
 .chat-bubble {
-  max-width: 78%;
-  padding: 9px 14px 22px;
+  max-width: 85%;
+  padding: 8px 14px 22px;
   border-radius: 16px;
   font-size: 13.5px;
   line-height: 1.5;
@@ -989,11 +1061,18 @@ const login = async () => {
   color: #fff;
   border-bottom-right-radius: 4px;
 }
-.chat-bubble--bot {
+.chat-bubble--other {
   background: #fff;
   color: #2d2d3a;
   border-bottom-left-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.chat-msg-name {
+  display: block;
+  font-weight: 700;
+  font-size: 11px;
+  margin-bottom: 3px;
+  color: #f5ac53;
 }
 .chat-time {
   position: absolute;
@@ -1002,27 +1081,6 @@ const login = async () => {
   font-size: 10px;
   opacity: 0.55;
   white-space: nowrap;
-}
-
-/* Typing indicator */
-.chat-typing {
-  padding: 12px 16px 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.chat-typing span {
-  width: 7px; height: 7px;
-  background: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  animation: typingBounce 1.1s infinite both;
-}
-.chat-typing span:nth-child(2) { animation-delay: 0.18s; }
-.chat-typing span:nth-child(3) { animation-delay: 0.36s; }
-@keyframes typingBounce {
-  0%, 80%, 100% { transform: translateY(0); background: #ccc; }
-  40% { transform: translateY(-7px); background: #f5ac53; }
 }
 
 /* Footer */
@@ -1044,6 +1102,7 @@ const login = async () => {
   background: #f8f8fc;
   color: #2d2d3a;
   transition: border-color 0.2s;
+  width: 100%;
 }
 .chat-input:focus {
   border-color: #f5ac53;

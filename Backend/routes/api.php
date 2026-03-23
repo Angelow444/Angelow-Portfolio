@@ -28,3 +28,7 @@ Route::post('/login', function (Request $request) {
         'message' => 'Invalid username or password'
     ], 401);
 });
+
+use App\Http\Controllers\ChatController;
+Route::get('/chat/messages', [ChatController::class, 'index']);
+Route::post('/chat/messages', [ChatController::class, 'store']);
